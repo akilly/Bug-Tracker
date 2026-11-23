@@ -73,6 +73,7 @@ using namespace std;
 const int NUM_MODULOS = 4;         // quantidade de modulos (linhas da matriz)
 const int NUM_SEVERIDADES = 3;     // quantidade de severidades (colunas da matriz)
 const int SEVERIDADE_CRITICA = 3;  // valor que representa um defeito critico
+const int MAX_DEFEITOS = 50;       // capacidade maxima do cadastro (minimo exigido: 20)
 
 // Nomes dos modulos. A posicao no vetor (0 a 3) e a linha usada na matriz.
 const string MODULOS[NUM_MODULOS] = {"Login", "Cadastro", "Pagamento", "Relatorios"};
@@ -178,6 +179,7 @@ string lerTexto(const string &msg) {
 int lerInteiro(const string &msg, int min, int max) {
     while (true) {
         string s = lerTexto(msg);
+        if (!cin) exit(0);  // entrada encerrada (Ctrl+Z/Ctrl+D): sai do programa
         int v;
         if (paraInteiro(s, v) && v >= min && v <= max) return v;
         cout << "  Valor invalido. Digite um numero entre " << min << " e " << max << ".\n";
@@ -299,6 +301,10 @@ void atualizarMatriz() {
 // ----------------------------------------------------------------------------
 void cadastrarDefeito() {
     cout << "\n=== CADASTRAR DEFEITO ===\n";
+    if ((int)cadastro.size() >= MAX_DEFEITOS) {
+        cout << "  Capacidade maxima atingida (" << MAX_DEFEITOS << " defeitos). Cadastro bloqueado.\n";
+        return;
+    }
 
     // O codigo precisa ser unico: se ja existir, cancela o cadastro.
     int cod = lerInteiro("Codigo (ID numerico): ", 1, 999999999);
@@ -811,6 +817,11 @@ void importarDefeitosArquivo(const string &nomeArquivo = "defeitos.txt") {
         string status = normalizarStatus(campos[4]);
         if (status.empty()) {
             motivo << "status invalido (\"" << campos[4] << "\").";
+            erros.push_back(motivo.str()); rejeitados++; continue;
+        }
+
+        if ((int)cadastro.size() >= MAX_DEFEITOS) {
+            motivo << "capacidade maxima atingida (" << MAX_DEFEITOS << ").";
             erros.push_back(motivo.str()); rejeitados++; continue;
         }
 
