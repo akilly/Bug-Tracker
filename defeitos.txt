@@ -1,0 +1,15 @@
+codigo;modulo;descricao;severidade;status
+101;Login;Senha aceita com espacos no final;2;Novo
+102;Login;Bloqueio apos 3 tentativas nao funciona;3;Em correcao
+103;Cadastro;CPF invalido aceito no formulario;3;Novo
+104;Cadastro;Mensagem de erro com texto cortado;1;Aguardando teste
+105;Pagamento;Cobranca duplicada ao clicar duas vezes;3;Reprovado
+106;Pagamento;Arredondamento incorreto no desconto;2;Aprovado
+107;Relatorios;Exportacao PDF sem cabecalho;1;Encerrado
+108;Relatorios;Filtro por data ignora o ultimo dia;2;Reaberto
+109;Pagamento;Timeout no gateway nao exibe aviso;3;Novo
+abc;Login;Codigo invalido de teste;2;Novo
+110;Estoque;Modulo inexistente;2;Novo
+111;Login;Severidade fora da faixa;5;Novo
+112;Cadastro;Status desconhecido;2;Pendente
+101;Login;Registro duplicado;1;Novo

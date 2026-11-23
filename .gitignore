@@ -1,0 +1,5 @@
+# Executaveis gerados pela compilacao
+bugtracker
+bugtracker.exe
+*.o
+*.obj
